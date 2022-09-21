@@ -1,6 +1,7 @@
 import CartButton from '../Cart/CartButton';
 import classes from './MainHeader.module.css';
 
+
 const MainHeader = (props) => {
   return (
     <header className={classes.header}>
@@ -8,12 +9,18 @@ const MainHeader = (props) => {
       <nav>
         <ul>
           <li>
-            <CartButton toggleCart={props.toggleCart} cart={props.cart}/>
+            <CartButton />
           </li>
         </ul>
       </nav>
     </header>
   );
 };
+
+
+
+
+
+
 
 export default MainHeader;

@@ -1,44 +1,35 @@
-import { useEffect, useState } from 'react';
+import { Component} from 'react';
+import { connect } from 'react-redux';
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
+import {increaseCart} from './action';
 
-function App() {
-  const [istoggle, setIsToggle] = useState(false);
-  const [cart, setCart] = useState(0);
-  // const [click, setClick] = useState(false);
-
-  // const toggleClick = () => {
-  //   setClick(!click);
-  // }
-
-  useEffect(() => {
-    console.log(cart);
-    // return()=>console.log(cart)
-    // cart;
-  },[cart])
-
-
-  const toggleCart = () => {
-    setIsToggle(!istoggle);
+const mapStateToProps = (state) => {
+  return {
+    istoggle: state.istoggle,
   }
-
-  const onIncrease = () => {
-    setCart(cart + 1);
-  }
-
-  const onDecrease = () => {
-    if (cart > 0) {
-      return setCart(cart - 1);
-    }
-  }
-
-  return (
-    <Layout toggleCart={toggleCart} cart={cart}>
-      <Cart istoggle={istoggle} cart={cart} onIncrease={onIncrease} onDecrease={onDecrease}/>
-      <Products onIncrease={onIncrease}/>
-    </Layout>
-  );
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onIncrease: (item) => () => dispatch(increaseCart(item)),
+  
+  }
+}
+
+class App extends Component {
+  
+
+  render() {
+    const { onIncrease, istoggle} = this.props
+    return (
+      <Layout>
+        { istoggle && <Cart /> }
+        <Products onIncrease={onIncrease}/>
+      </Layout>
+    );
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

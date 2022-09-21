@@ -13,7 +13,7 @@ const ProductItem = (props) => {
         </header>
         <p>{description}</p>
         <div className={classes.actions}>
-          <button onClick={onIncrease}>Add to Cart</button>
+          <button onClick={onIncrease(props.list)}>Add to Cart</button>
         </div>
       </Card>
     </li>

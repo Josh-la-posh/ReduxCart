@@ -11,6 +11,7 @@ const Products = (props) => {
         {SHOPPING_LIST.map(list =>{
           return (
             <ProductItem
+              list={list}
               key={list.id}
               title={list.title}
               price={list.price}

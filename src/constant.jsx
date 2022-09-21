@@ -1,0 +1,3 @@
+export const TOGGLE_CART = 'TOGGLE_CART';
+export const INCREASE_CART = 'INCREASE_CART';
+export const DECREASE_CART = 'DECREASE_CART';

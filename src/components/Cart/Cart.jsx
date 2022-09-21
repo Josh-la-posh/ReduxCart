@@ -1,29 +1,52 @@
 import Card from '../UI/Card';
 import classes from './Cart.module.css';
 import CartItem from './CartItem';
-import SHOPPING_LIST from '../../shoppingList';
+import {useSelector}  from 'react-redux';
 
 const Cart = (props) => {
-  const {istoggle, cart, onIncrease, onDecrease} = props
+
+
+  const cartItems = useSelector(state => state.items);
+
+
+  if(cartItems.length === 0){
+    return <div>
+      Cart Empty ! 
+    </div>
+  }
+
   return (
-    istoggle ? 
+
       <Card className={classes.cart}>
-      <h2>Your Shopping Cart</h2>
+        <h2>Your Shopping Cart</h2>
       <ul>
-        {SHOPPING_LIST.map(list => {
-          return (
-            <CartItem
-              key={list.id}
-              item={{ title: list.title, quantity: cart, total: (cart * list.price), price: list.price }}
-              onDecrease={onDecrease}
-              onIncrease={onIncrease}
-            />
-          )
-        })}
+
+        {cartItems.map(list => {
+        
+            return (
+              <CartItem
+                key={list.id}
+                item={{
+                  title: list.title,
+                  quantity: list.quantity,
+                  total: (list.totalPrice),
+                  price: list.price,
+                }}
+                id={list.id}
+              />
+            )
+          }
+        )}
+
       </ul>
     </Card>
-    :<div></div>
   );
 };
+
+
+
+
+
+
 
 export default Cart;
